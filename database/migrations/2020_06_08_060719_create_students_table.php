@@ -20,7 +20,7 @@ class CreateStudentsTable extends Migration
             $table->string('class');
             $table->string('description');
             $table->string('picture');
-            $table->integer('activeFollowup')->default(0);//0:not in followup,1:in followup
+            $table->integer('activeFollowup')->default(1);//0:not in followup,1:in followup
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
