@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Str;
 class CreateUsersTable extends Migration
 {
     /**
@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
                 'email' => 'admin@example.com',
                 'position_id' => 1,
                 'password' => bcrypt('password'),
-                'remember_token' => str_random(10)
+                'remember_token' => Str::random(10)
             )
         );
 
@@ -47,7 +47,7 @@ class CreateUsersTable extends Migration
                 'email' => 'normal@example.com',
                 'position_id' => 4,
                 'password' => bcrypt('password'),
-                'remember_token' => str_random(10)
+                'remember_token' => Str::random(10)
             )
         );
 
