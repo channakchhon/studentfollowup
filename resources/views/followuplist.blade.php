@@ -18,7 +18,7 @@
             <td>Doe</td>
             <td>john@example.com</td>
             <td>john@example.com</td>
-            <td>Out | Edit</td>
+            <td><i class="fas fa-user-alt-slash"></i> | <i class="fas fa-user-edit"></i> </td>
         </tr>
         <tr>
             <td>Mary</td>
