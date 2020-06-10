@@ -2,22 +2,32 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#home">Follow Up</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#menu1">Out of Followup</a>
+        </li>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    </ul>
 
-                    You are logged in!
-                </div>
-            </div>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="home" class="container tab-pane active"><br>
+            <a href="#" data-toggle="modal" data-target="#myModal">Add Student</a>
+            <br>
+            <br>
+            @include('followuplist')
+        </div>
+        <div id="menu1" class="container tab-pane fade"><br>
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat.</p>
         </div>
     </div>
 </div>
+@include('addstudent')
+
 @endsection
