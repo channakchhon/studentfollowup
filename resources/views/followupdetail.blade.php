@@ -1,10 +1,10 @@
-<!-- The Modal -->
+<!-- Detail Modal -->
 <div class="modal fade" id="detailModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="background-color: #fdfdfd">
 
             <!-- Modal Header -->
-            <div class="modal-header text-center" style="display: block">
+            <div class="modal-header text-center" style="display: block;background-color:#e9ecef;">
                 <img src="{{asset('image/student.png')}}" alt="avatar" width="100px" height="100px">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>

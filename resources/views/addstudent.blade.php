@@ -1,4 +1,4 @@
-<!-- The Modal -->
+<!-- Add Student Modal -->
 <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">

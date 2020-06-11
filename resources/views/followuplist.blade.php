@@ -1,4 +1,4 @@
-<input class="form-control" id="myInput" type="text" placeholder="Search..">
+<input class="form-control" id="followupSearch" type="text" placeholder="Search..">
 <br>
 <div class="row">
     <div class="col-12">
@@ -9,11 +9,11 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Class</th>
-                    <th>Action</th>
+                    <th style="width:10%">Action</th>
                 </tr>
             </thead>
-            <tbody id="myTable">
-                <tr onclick="showDetail()">
+            <tbody id="followupTable">
+                <tr>
                     <td><img src="{{asset('image/student.png')}}" alt="avatar" width="100px" height="100px"></td>
                     <td>Doe</td>
                     <td>john@example.com</td>
@@ -39,23 +39,30 @@
     </div>
 </div>
 
-@include('followupdetail')
+{{-- @include('followupdetail') --}}
 
 @push('scripts')
 <script>
     $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
+      $("#followupSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function() {
+        $("#followupTable tr").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
       });
 
-     
+      $('#followupTable tr td:not(:last-child)').click(function () {
+        showDetail()
+      });
+      $('#outTable tr td:not(:last-child)').click(function () {
+        showDetail()
+      });
 
     });
+
     function showDetail(){
         $('#detailModal').modal('show')
+        console.log("showdetail...")
     }
 </script>
 @endpush

@@ -83,9 +83,12 @@
 
         <main class="py-4">
             @yield('content')
+            @include('followupdetail')
         </main>
     </div>
+    
     @stack('scripts')
+  
  </body>
 
 </html>
