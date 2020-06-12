@@ -11,15 +11,16 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form>
+                <form action="{{route('students.store')}}" method="POST">
+                    @csrf
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" class="form-control" id="email" placeholder="First Name"
-                                    name="fname">
+                                <input type="text" class="form-control" id="email" placeholder="First Name" name="fname"
+                                    required>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Last Name" name="lname">
+                                <input required type="text" class="form-control" placeholder="Last Name" name="lname">
                             </div>
                         </div>
                     </div>
@@ -43,8 +44,8 @@
                                 <select name="class" class="custom-select">
                                     <option selected>Tutor</option>
                                     @foreach ($tutors as $tutor)
-                                        <option value="{{$tutor->id}}">{{$tutor->firstName}}</option>
-                                    @endforeach                                    
+                                    <option value="{{$tutor->id}}">{{$tutor->firstName}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -52,19 +53,22 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col">
-                                <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+                                <textarea class="form-control" rows="5" id="description"
+                                    placeholder="Description"></textarea>
                             </div>
                         </div>
                     </div>
 
+
+
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </form>
             </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-
         </div>
     </div>
 </div>
