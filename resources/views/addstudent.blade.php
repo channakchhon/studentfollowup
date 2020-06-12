@@ -31,6 +31,9 @@
                                     <option value="2021A">2021A</option>
                                     <option value="2021B">2021B</option>
                                     <option value="2021C">2021C</option>
+                                    <option value="WEP2020A">WEP2020A</option>
+                                    <option value="WEP2020B">WEP2020B</option>
+                                    <option value="SNA2020">SNA2020</option>
                                 </select>
                             </div>
                             <div class="col">
@@ -39,9 +42,9 @@
                             <div class="col">
                                 <select name="class" class="custom-select">
                                     <option selected>Tutor</option>
-                                    <option value="2021A">2021A</option>
-                                    <option value="2021B">2021B</option>
-                                    <option value="2021C">2021C</option>
+                                    @foreach ($tutors as $tutor)
+                                        <option value="{{$tutor->id}}">{{$tutor->firstName}}</option>
+                                    @endforeach                                    
                                 </select>
                             </div>
                         </div>
