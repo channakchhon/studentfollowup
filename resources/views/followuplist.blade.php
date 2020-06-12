@@ -13,27 +13,19 @@
                 </tr>
             </thead>
             <tbody id="followupTable">
-                <tr>
-                    <td><img src="{{asset('image/student.png')}}" alt="avatar" width="100px" height="100px"></td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                    <td> <a class="text-success" data-toggle="tooltip" data-placement="bottom" title="Out from Followup" href="#"><i class="fas fa-user-alt-slash"></i></a> | <a href="#" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-user-edit"></i></a></td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                    <td>mary@example.com</td>
-                    <td>Out | Edit</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
-                    <td>july@example.com</td>
-                    <td>Out | Edit</td>
-                </tr>
+                @if (count($students)>0)
+                    @foreach ($students as $student)
+                        <tr>
+                            <td><img src="{{asset('image/$student->picture')}}" alt="avatar" width="100px" height="100px"></td>
+                            <td>{{$student->firstName}}</td>
+                            <td>{{$student->lastName}}</td>
+                            <td>{{$student->class}}</td>
+                            <td> <a class="text-success" data-toggle="tooltip" data-placement="bottom" title="Out from Followup" href="#"><i class="fas fa-user-alt-slash"></i></a> | <a href="#" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-user-edit"></i></a></td>
+                        </tr>  
+                    @endforeach
+                    
+                @endif
+                             
             </tbody>
         </table>
     </div>
