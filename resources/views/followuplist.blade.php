@@ -18,7 +18,7 @@
                     <td>Doe</td>
                     <td>john@example.com</td>
                     <td>john@example.com</td>
-                    <td> <a class="text-success" href="#"><i class="fas fa-user-alt-slash"></i></a> | <a href="#"><i class="fas fa-user-edit"></i></a></td>
+                    <td> <a class="text-success" data-toggle="tooltip" data-placement="bottom" title="Out from Followup" href="#"><i class="fas fa-user-alt-slash"></i></a> | <a href="#" data-toggle="tooltip" data-placement="bottom" title="Edit"><i class="fas fa-user-edit"></i></a></td>
                 </tr>
                 <tr>
                     <td>Mary</td>
@@ -57,7 +57,7 @@
       $('#outTable tr td:not(:last-child)').click(function () {
         showDetail()
       });
-
+    
     });
 
     function showDetail(){

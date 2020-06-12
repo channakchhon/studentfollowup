@@ -18,7 +18,7 @@
                     <td>Doe</td>
                     <td>john@example.com</td>
                     <td>john@example.com</td>
-                    <td> <a class="text-danger" href="#"><i class="fas fa-hospital-user"></i></a></td>
+                    <td> <a class="text-danger" href="#" data-toggle="tooltip" data-placement="bottom" title="Back to Followup"><i class="fas fa-hospital-user"></i></a></td>
                 </tr>               
             </tbody>
         </table>
