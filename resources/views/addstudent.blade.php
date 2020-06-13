@@ -11,7 +11,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="{{route('students.store')}}" method="POST">
+                <form action="{{route('students.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="form-row">
@@ -27,8 +27,8 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col">
-                                <select name="class" class="custom-select">
-                                    <option selected>Class</option>
+                                <select name="class" required class="custom-select">
+                                    <option value="">Class</option>
                                     <option value="2021A">2021A</option>
                                     <option value="2021B">2021B</option>
                                     <option value="2021C">2021C</option>
@@ -38,11 +38,11 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <input class="form-control" type="file" name="file">
+                                <input class="form-control" type="file" name="picture">
                             </div>
                             <div class="col">
-                                <select name="class" class="custom-select">
-                                    <option selected>Tutor</option>
+                                <select name="tutor" class="custom-select">
+                                    <option selected value="">Tutor</option>
                                     @foreach ($tutors as $tutor)
                                     <option value="{{$tutor->id}}">{{$tutor->firstName}}</option>
                                     @endforeach
@@ -54,7 +54,7 @@
                         <div class="form-row">
                             <div class="col">
                                 <textarea class="form-control" rows="5" id="description"
-                                    placeholder="Description"></textarea>
+                                    placeholder="Description" name="description"></textarea>
                             </div>
                         </div>
                     </div>

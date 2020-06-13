@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Student;
 
 class HomeController extends Controller
 {
@@ -25,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $tutors = User::all();
-        // dd($tutors);
-        return view('home',compact('tutors'));
+        $students = Student::where('activeFollowup','1')->get();
+        // dd($students);
+        return view('home',compact('tutors','students'));
     }
 }

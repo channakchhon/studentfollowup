@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
                 'lastName' => 'user',
                 'email' => 'admin@example.com',
                 'position_id' => 1,
+                'role'=>1,
                 'password' => bcrypt('password'),
                 'remember_token' => Str::random(10)
             )

@@ -18,8 +18,8 @@ class CreateStudentsTable extends Migration
             $table->string('firstName');
             $table->string('lastName');
             $table->string('class');
-            $table->string('description');
-            $table->string('picture');
+            $table->string('description')->nullable();;
+            $table->string('picture')->default('student.png');
             $table->integer('activeFollowup')->default(1);//0:not in followup,1:in followup
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
