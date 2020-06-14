@@ -1,33 +1,35 @@
-<!-- Add Student Modal -->
-<div class="modal fade" id="myModal">
+<!-- Edit Student Modal -->
+<div class="modal fade" id="editModal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Add Student</h4>
+                <h4 class="modal-title">Edit Student</h4>
+                <img id="picStudent" src="" alt="avatar" width="100px" height="100px">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="{{route('students.store')}}" method="POST" enctype="multipart/form-data">
+                <form id="editForm" action="" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="First Name" name="fname"
+                                <input id="fname" type="text" class="form-control" placeholder="First Name" name="fname"
                                     required>
                             </div>
                             <div class="col">
-                                <input required type="text" class="form-control" placeholder="Last Name" name="lname">
+                                <input id="lname" required type="text" class="form-control" placeholder="Last Name" name="lname">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col">
-                                <select name="class" required class="custom-select">
+                                <select id="clss" name="class" required class="custom-select">
                                     <option value="">Class</option>
                                     <option value="2021A">2021A</option>
                                     <option value="2021B">2021B</option>
@@ -38,10 +40,11 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <input class="form-control" type="file" name="picture">
+                                <input id="picture" class="form-control" type="file" name="picture">
+                                {{-- <input id="picHidden" type="hidden" name="picHidden"> --}}
                             </div>
                             <div class="col">
-                                <select name="tutor" class="custom-select">
+                                <select id="tutor" name="tutor" class="custom-select">
                                     <option selected value="">Tutor</option>
                                     @foreach ($tutors as $tutor)
                                     <option value="{{$tutor->id}}">{{$tutor->firstName}}</option>
@@ -53,7 +56,7 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="col">
-                                <textarea class="form-control" rows="5" 
+                                <textarea id="description" class="form-control" rows="5" 
                                     placeholder="Description" name="description"></textarea>
                             </div>
                         </div>
@@ -64,7 +67,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>

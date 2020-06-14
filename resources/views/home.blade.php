@@ -28,5 +28,6 @@
 </div>
 
 @include('addstudent')
+@include('editstudent')
 
 @endsection
