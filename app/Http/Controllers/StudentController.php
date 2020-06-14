@@ -35,16 +35,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->picture->extension());
         $student = new Student;
         $student->firstName = $request->fname;
         $student->lastName = $request->lname;
         $student->class = $request->class;
         $student->description = $request->description;
         $student->user_id = $request->tutor;
-
-      
-  
         if($request->file('picture')){
             $request->validate([
                 'picture' => 'image|mimes:jpeg,png,jpg'
@@ -90,7 +87,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student->firstName = $request->fname;
+        $student->lastName = $request->lname;
+        $student->class = $request->class;
+        $student->description = $request->description;
+        $student->user_id = $request->tutor;
+        if($request->picture!=null){           
+            $request->validate([
+                'picture' => 'image|mimes:jpeg,png,jpg'
+            ]);
+            $imageName = time().'.'.$request->picture->extension();   
+            $request->picture->move(public_path('image'), $imageName);
+            $student->picture = $imageName;
+        }
+        $student->save();
+        return redirect('home');
     }
 
     /**
