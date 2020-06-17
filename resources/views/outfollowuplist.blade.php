@@ -9,17 +9,25 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Class</th>
+                    @if (Auth::user()->role==1)
                     <th style="width:5%">Action</th>
+                    @endif
+                    
                 </tr>
             </thead>
             <tbody id="outTable">
-                <tr>
-                    <td><img src="{{asset('image/student.png')}}" alt="avatar" width="100px" height="100px"></td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                    <td>john@example.com</td>
-                    <td> <a class="text-danger" href="#" data-toggle="tooltip" data-placement="bottom" title="Back to Followup"><i class="fas fa-hospital-user"></i></a></td>
-                </tr>               
+                @foreach ($studentOut as $student)
+                    <tr data-student="{{$student->id}}" >
+                        <td><img src="{{asset('image/'.$student->picture)}}" alt="avatar" width="100px" height="100px"></td>
+                        <td>{{$student->firstName}}</td>
+                        <td> {{$student->lastName}}</td>
+                        <td>{{$student->class}}</td>
+                        @if (Auth::user()->role==1)
+                        <td> <a class="text-danger" href="{{route('backtofollowup',$student->id)}}" data-toggle="tooltip" data-placement="bottom" title="Back to Followup"><i class="fas fa-hospital-user"></i></a></td>
+                        @endif
+                        
+                    </tr>         
+                @endforeach      
             </tbody>
         </table>
     </div>

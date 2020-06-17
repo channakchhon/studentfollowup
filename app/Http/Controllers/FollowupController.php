@@ -12,4 +12,10 @@ class FollowupController extends Controller
         $student->save();
         return redirect('home');
     }
+    public function backtofollow($id){
+        $student = Student::find($id);
+        $student->activeFollowup = 1;
+        $student->save();
+        return redirect('home');
+    }
 }

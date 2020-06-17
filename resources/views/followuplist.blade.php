@@ -86,8 +86,11 @@
         // console.log("row..."+$(this).data('id'))
         // showDetail()
       });
-      $('#outTable tr td:not(:last-child)').click(function () {
-        // showDetail()
+      $('#outTable tr td:not(:last-child)').click(function (e) {
+        e.preventDefault()
+        var student = $(this).parent().data('student')
+        console.log(student)
+        window.location.href = '{!!'students/'!!}'+student
       });
 
       $('#editModal').on('show.bs.modal', function (event) {
@@ -166,10 +169,12 @@
     
 }
 
-    // function showDetail(){
-    //     // console.log("showdetail..."+student['firstName'])        
-    //     $('#detailModal').modal('show')  
-    // }
+    function showDetail(){
+        e.preventDefault()
+        var student = $(this).parent().data('student')
+        console.log(student)
+        window.location.href = '{!!'students/'!!}'+student
+    }
 
     // function editStudent(id,event){
     //     event.preventDefault()        
