@@ -32,7 +32,7 @@
                    
                     <td> 
                         <a  class="text-success" data-toggle="tooltip" data-placement="bottom" title="Out from Followup"
-                            href="#"><i class="fas fa-user-alt-slash"></i></a> |
+                            href="{{route('outoffollow',$student->id)}}"><i class="fas fa-user-alt-slash"></i></a> |
                         <a 
                             {{-- style="pointer-events: auto;"  --}}
                             data-fname="{{$student->firstName}}" 

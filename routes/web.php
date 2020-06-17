@@ -20,5 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/outoffollowup/{id}', 'FollowupController@outoffollow')->name('outoffollow');
 Route::resource('students', 'StudentController');
 Route::resource('comments', 'CommentController');
