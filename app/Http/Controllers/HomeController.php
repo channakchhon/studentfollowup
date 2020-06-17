@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $tutors = User::all();
-        $students = Student::where('activeFollowup','1')->get();
+        $students = Student::with('user','users')->where('activeFollowup','1')->get();
         // dd($students);
         return view('home',compact('tutors','students'));
     }

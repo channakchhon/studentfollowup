@@ -64,7 +64,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        // dd($student);
+        return view('followupdetail',compact('student'));
     }
 
     /**

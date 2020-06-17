@@ -1,118 +1,149 @@
-<!-- Detail Modal -->
-<div class="modal fade" id="detailModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content" style="background-color: #fdfdfd">
+@extends('layouts.app')
 
-            <!-- Modal Header -->
-            <div class="modal-header text-center" style="display: block;background-color:#e9ecef;">
-                <img src="{{asset('image/student.png')}}" alt="avatar" width="100px" height="100px">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+@section('content')
+{{-- {{dd($student)}} --}}
+<div class="container">
 
-            <!-- Modal body -->
-            <div class="modal-body">
-                <h2><strong>Chan DaraTy</strong> - Class2022A</h2>
-                <br>
-                <h3>Description</h3>
-                <p>
-                    She is historically slow learner and barely pass the exam since M2. 
-                    In class she is pay attention ( not sleepy, note and ask some questions). 
-                    She lack understanding the lessons of any subjects. 
-                    We assign her with group and sit with help full friends. 
-                    For her midterm exam, she has a bad result than we expected. 
-                </p>
-                <h5>Tutor By: Channak</h5>
-                <hr>
-                <div class="row bootstrap snippets">
-                    <div class="col-md-12 col-md-offset-2 col-sm-12">
-                        <div class="comment-wrapper">
-                            <div class="panel panel-info">                                
-                                <div class="panel-body">
-                                    <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+    <div class="card">
+        <div class="card-header text-center">
+            <img src="{{asset('image/'.$student->picture)}}" alt="avatar" width="100px" height="100px">
+        </div>
+        <div class="card-body">
+            <h2><strong id="studentname">{{$student->firstName}} {{$student->lastName}}</strong> - <span
+                    id="studentclass">{{$student->class}}</span></h2>
+            <br>
+            <h3>Description</h3>
+            <p id="studentdescription">
+                {{$student->description}}
+            </p>
+            <h5>Tutor By:
+                @if ($student->user)
+                {{$student->user->firstName}}
+                @else
+                None
+                @endif
+            </h5>
+            <hr>
+            <div class="row bootstrap snippets">
+                <div class="col-md-12 col-md-offset-2 col-sm-12">
+                    <div class="comment-wrapper">
+                        <div class="panel panel-info">
+                            <div class="panel-body">
+                                <form action="{{route('comments.store')}}" method="POST">
+                                    @csrf
+                                    <textarea class="form-control" placeholder="Write a comment..." rows="3"
+                                        name="comment"></textarea>
+                                    <input type="hidden" name="studentid" value="{{$student->id}}">
                                     <br>
-                                    <button type="button" class="btn btn-primary">Post</button>
-                                    <div class="clearfix"></div>
-                                    <br>
-                                    {{-- <hr> --}}
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
-                                                <img class="img-circle" src="{{asset('image/2.png')}}" alt="">
-                                            </a>
-                                            <div class="media-body">
-                                                <strong>Sokchan</strong>
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">Dec 4, 2019 at 4:12 PM</small>
-                                                </span>                                                
-                                                <textarea id="comment" class="form-control" rows="3" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet.</textarea>
-                                                <small><a id="editComment" onclick="edit()" href="#">Edit</a> | <a id="deleteComment" onclick="deleteComment()"  href="#">Delete</a></small>
-                                            </div>
-                                            
-                                        </li>
-                                        <li class="media">
-                                            <a href="#" class="pull-left">
-                                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
-                                            </a>
-                                            <div class="media-body">                                                
-                                                <strong>LaurenceCorreil</strong>
-                                                <span class="text-muted pull-right">
-                                                    <small class="text-muted">30 min ago</small>
-                                                </span>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                    Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
-                                                </p>
-                                            </div>
-                                        </li>
-                      
-                                    </ul>
-                                </div>
+                                    <button type="submit" class="btn btn-primary">Post</button>
+                                </form>
+                                <div class="clearfix"></div>
+                                <br>
+                                {{-- <hr> --}}
+                                <ul class="media-list">
+                                    {{-- {{dd($student->users)}} --}}
+                                    @foreach ($student->users as $user)
+                                    {{-- {{dd($users)}} --}}
+                                    <li class="media">
+                                        {{-- <h1>id {{$user->pivot->id}}</h1> --}}
+                                        <a href="#" class="pull-left">
+                                            <img class="img-circle" src="{{asset('image/2.png')}}" alt="">
+                                        </a>
+                                        <div class="media-body">
+                                            <strong>{{$student->commentor($user->pivot->user_id)}}</strong>
+                                            <span class="text-muted pull-right">
+                                                <small class="text-muted">{{$user->pivot->created_at}}</small>
+                                            </span>
+                                            <textarea readonly id="comment{{$user->pivot->user_id}}"
+                                                class="form-control" rows="3">{{$user->pivot->comment}}</textarea>
+
+                                            @if (Auth::id()==$user->pivot->user_id)
+                                            <small>
+                                                <a 
+                                                    data-url="{{route('comments.update',$user->pivot->id)}}"
+                                                    data-id="{{$user->id}}"
+                                                    data-comment="{{$user->pivot->comment}}"
+                                                    data-toggle="modal" 
+                                                    data-target="#commentModal" href="#">Edit</a>                                                
+                                                <form action="{{route('comments.destroy',$user->pivot->id)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit">
+                                                        Delete
+                                                    </button>
+                                                </form>
+                                                
+                                            </small>
+                                            @endif
+
+                                        </div>
+
+                                    </li>
+
+                                    @endforeach
+
+                                </ul>
                             </div>
                         </div>
-                
                     </div>
+
                 </div>
             </div>
-
-            <!-- Modal footer -->
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div> --}}
-
         </div>
     </div>
+
 </div>
+
+@endsection
+
+
+{{-- modal edit comment --}}
+
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <form id="editcommentstudent" action="" method="post">
+        @csrf
+        @method('PUT')
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">               
+                    
+                    <textarea name="editcomment" id="editcomment" class="form-control" rows="3"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+                
+        </div>
+    </div>
+</form>
+</div>
+
 
 @push('scripts')
 
 <script>
-    var editClick = true;
-    function edit(){
-        console.log("edit...")
-        if(editClick){
-            $('#comment').prop('readonly', false)
-            $('#comment').select()
-            $('#editComment').text("Save")
-            $('#deleteComment').text("Cancel")
-        }else{
-            $('#comment').prop('readonly', true)
-            $('#editComment').text("Edit")
-            $('#deleteComment').text("Delete")
-        }
-        editClick = !editClick
-    }
+     $(document).ready(function(){
+        $('#commentModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var url = button.data('url')
+            var id = button.data('id')
+            console.log("id"+id)
+            var comment = button.data('comment')
+            var modal = $(this)
+            modal.find('#editcomment').val(comment)
+            $("#editcommentstudent").attr('action',url)
+        })
+     })
 
-    function deleteComment(){
-        if(editClick){
-            console.log("delete clicked....")
-        }else{
-            console.log("cancel clicked...")
-            $('#comment').prop('readonly', true)
-            $('#editComment').text("Edit")
-            $('#deleteComment').text("Delete")
-            editClick = !editClick
-        }
-    }
 </script>
-    
+
 @endpush

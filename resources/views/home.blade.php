@@ -16,9 +16,11 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div id="home" class="container tab-pane active"><br>
+            @if (Auth::user()->role==1)
             <a href="#" data-toggle="modal" data-target="#myModal">Add Student</a>
             <br>
             <br>
+            @endif
             @include('followuplist')
         </div>
         <div id="menu1" class="container tab-pane fade"><br>

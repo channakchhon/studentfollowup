@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function students(){
+        return $this->belongsToMany(Student::class,'student_user','user_id','student_id')->withPivot('comment')->withTimestamps();
+    }
 }
